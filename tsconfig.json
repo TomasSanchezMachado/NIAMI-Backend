@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    /* Paths */
+    "rootDir": "./src",        // Carpeta de código fuente
+    "outDir": "./dist",        // Carpeta de salida compilada
+
+    /* Environment */
+    "target": "ES2020",        // Nivel de JS a generar
+    "module": "CommonJS",      // Necesario para Node.js
+    "lib": ["ES2020"],         
+    "types": ["node"],         // Tipos para Node.js
+
+    /* Debug & Build */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    /* Type checking */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Node.js specifics */
+    "esModuleInterop": true,   // Permite usar imports estilo ES en Node
+    "skipLibCheck": true
+  },
+  "include": ["src"],          // Archivos que se compilan
+  "exclude": ["node_modules"]  // Ignorar dependencias
+}
