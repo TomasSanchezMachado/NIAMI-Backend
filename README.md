@@ -6,6 +6,7 @@
 - **Node.js**: Entorno de ejecución para el backend.
 - **PostgreSQL**: Base de datos relacional.
 - **MikroORM**: ORM para TypeScript/Node.js, facilita el manejo de entidades y migraciones.
+- **Express**: Framework para crear servidores y APIs en Node.js.
 - **dotenv**: Manejo de variables de entorno.
 - **uuid**: Generación de identificadores únicos.
 

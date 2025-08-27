@@ -1,0 +1,31 @@
+### Obtener todos los productos
+GET http://localhost:3000/products
+Content-Type: application/json
+
+### Obtener producto por ID
+GET http://localhost:3000/products/1
+Content-Type: application/json
+
+### Crear producto
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "Hamburguesa Clásica",
+  "price": 1200,
+  "description": "Hamburguesa con carne, queso y lechuga"
+}
+
+### Actualizar producto
+PUT http://localhost:3000/products/95b8f8cb-ab75-45d1-b70b-b64d68b4eaf2
+Content-Type: application/json
+
+{
+  "name": "Hamburguesa Doble",
+  "price": 1500,
+  "description": "Hamburguesa doble carne con queso cheddar"
+}
+
+### Eliminar producto
+DELETE http://localhost:3000/products/1
+Content-Type: application/json
