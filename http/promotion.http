@@ -1,0 +1,29 @@
+### Obtener todas las promociones
+GET http://localhost:3000/promotions
+Content-Type: application/json
+
+### Obtener promoción por ID
+GET http://localhost:3000/promotions/1
+Content-Type: application/json
+
+### Crear promoción
+POST http://localhost:3000/promotions
+Content-Type: application/json
+
+{
+  "name": "Promo 2x1",
+  "discountPercent": 50
+}
+
+### Actualizar promoción
+PUT http://localhost:3000/promotions/2c3faf66-b6f0-4fa4-996f-6e406d38eb13
+Content-Type: application/json
+
+{
+  "name": "Promo 3x2",
+  "discountPercent": 33
+}
+
+### Eliminar promoción
+DELETE http://localhost:3000/promotions/1
+Content-Type: application/json

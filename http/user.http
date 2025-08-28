@@ -1,0 +1,33 @@
+### Obtener todos los usuarios
+GET http://localhost:3000/users
+Content-Type: application/json
+
+### Obtener usuario por ID
+GET http://localhost:3000/users/1
+Content-Type: application/json
+
+### Crear usuario
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Juan Perez",
+  "email": "juan@example.com",
+  "password": "123456",
+  "role": "customer"
+}
+
+### Actualizar usuario
+PUT http://localhost:3000/users/db448763-9821-4ac2-86ec-222b44de544a
+Content-Type: application/json
+
+{
+  "name": "Juan Actualizado",
+  "email": "juan2@example.com",
+  "password": "654321",
+  "role": "admin"
+}
+
+### Eliminar usuario
+DELETE http://localhost:3000/users/1
+Content-Type: application/json

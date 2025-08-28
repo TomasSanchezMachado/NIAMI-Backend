@@ -12,8 +12,64 @@
 
 ## Estructura principal
 
-- `src/entities/`: Entidades del dominio (User, Product, Order, etc).
+
+La estructura principal del proyecto es la siguiente:
+
+```text
+NIAMI-Backend/
+├── package.json
+├── README.md
+├── tsconfig.json
+├── http/
+│   ├── ingredient.http
+│   ├── product.http
+│   ├── promotion.http
+│   ├── provider.http
+│   └── user.http
+├── src/
+│   ├── index.ts
+│   ├── mikro-orm.config.ts
+│   ├── controllers/
+│   │   ├── ingredient.controller.ts
+│   │   ├── product.controller.ts
+│   │   ├── promotion.controller.ts
+│   │   ├── provider.controller.ts
+│   │   └── user.controller.ts
+│   ├── entities/
+│   │   ├── BaseEntity.ts
+│   │   ├── Category.ts
+│   │   ├── Ingredient.ts
+│   │   ├── Order.ts
+│   │   ├── OrderItem.ts
+│   │   ├── Product.ts
+│   │   ├── Promotion.ts
+│   │   ├── Provider.ts
+│   │   ├── Supplier.ts
+│   │   └── User.ts
+│   ├── middlewares/
+│   ├── migrations/
+│   │   └── Migration20250826181250.ts
+│   ├── routes/
+│   │   ├── ingredient.routes.ts
+│   │   ├── product.routes.ts
+│   │   ├── promotion.routes.ts
+│   │   ├── provider.routes.ts
+│   │   └── user.routes.ts
+│   └── services/
+│       ├── ingredient.service.ts
+│       ├── product.service.ts
+│       ├── promotion.service.ts
+│       ├── provider.service.ts
+│       └── user.service.ts
+```
+
+Breve descripción de carpetas principales:
+- `src/entities/`: Entidades del dominio.
 - `src/migrations/`: Migraciones de base de datos.
+- `src/controllers/`: Controladores de las rutas de la API.
+- `src/routes/`: Definición de rutas de la API.
+- `src/services/`: Lógica de negocio y servicios.
+- `src/middlewares/`: Aun nada.
 - `mikro-orm.config.ts`: Configuración de MikroORM y conexión a la base de datos.
 - `src/index.ts`: Punto de entrada del proyecto.
 
@@ -56,7 +112,6 @@
 	```
 
 ## Notas
-
-- El proyecto actualmente solo define el modelo de datos y la estructura base. Hay que extenderlo agregando rutas, controladores y lógica de negocio.
-- En la carpeta `src/entities` podes ver cómo están modeladas las entidades(Hay de mas).
+- El proyecto actualmente implementa la estructura base de un backend en Node.js con TypeScript, integrando MikroORM para la gestión de entidades y migraciones en PostgreSQL. Incluye modelos de dominio, rutas, controladores y servicios para las entidades principales (ingredientes, productos, promociones, proveedores y usuarios). Permite realizar operaciones CRUD básicas sobre estas entidades a través de endpoints definidos (extensión futura del sistema).
+- En la carpeta `src/entities` hay entities de mas.
 

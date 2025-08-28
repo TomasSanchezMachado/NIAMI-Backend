@@ -1,0 +1,27 @@
+### Obtener todos los ingredientes
+GET http://localhost:3000/ingredients
+Content-Type: application/json
+
+### Obtener ingrediente por ID
+GET http://localhost:3000/ingredients/1
+Content-Type: application/json
+
+### Crear ingrediente
+POST http://localhost:3000/ingredients
+Content-Type: application/json
+
+{
+  "name": "Queso Cheddar"
+}
+
+### Actualizar ingrediente
+PUT http://localhost:3000/ingredients/cf70facd-3da8-4ef1-a4c0-84fa4f04210c
+Content-Type: application/json
+
+{
+  "name": "Queso Azul"
+}
+
+### Eliminar ingrediente
+DELETE http://localhost:3000/ingredients/1
+Content-Type: application/json
