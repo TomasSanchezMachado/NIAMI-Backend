@@ -1,5 +1,7 @@
-import { Entity, PrimaryKey, Property, ManyToMany, Collection } from '@mikro-orm/core';
+
+import { Entity, PrimaryKey, Property, ManyToMany, Collection, ManyToOne } from '@mikro-orm/core';
 import { Product } from './Product';
+import { Provider } from './Provider';
 import { v4 } from 'uuid';
 
 @Entity()
@@ -10,11 +12,17 @@ export class Ingredient {
   @Property()
   name: string;
 
+
   // Ingredient es el lado inverso, usamos mappedBy
   @ManyToMany(() => Product, undefined, { mappedBy: 'ingredients' })
   products = new Collection<Product>(this);
 
-  constructor(name: string) {
+  // Relación ManyToOne: cada ingrediente tiene un proveedor
+  @ManyToOne(() => Provider)
+  provider!: Provider;
+
+  constructor(name: string, provider: Provider) {
     this.name = name;
+    this.provider = provider;
   }
 }
