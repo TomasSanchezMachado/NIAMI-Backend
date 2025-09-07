@@ -1,8 +1,13 @@
+
 import { User } from '../entities/User';
 import { EntityManager } from '@mikro-orm/core';
 
 export class UserService {
   constructor(private readonly em: EntityManager) {}
+
+  async getUserByEmail(email: string) {
+    return this.em.findOne(User, { email });
+  }
 
   async createUser({ name, email, password, role }: { name: string; email: string; password: string; role: 'admin' | 'customer' }) {
     const user = new User();

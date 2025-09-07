@@ -9,6 +9,9 @@
 - **Express**: Framework para crear servidores y APIs en Node.js.
 - **dotenv**: Manejo de variables de entorno.
 - **uuid**: Generación de identificadores únicos.
+- **jsonwebtoken**: Autenticación y generación de tokens JWT.
+- **bcryptjs**: Hashing y verificación de contraseñas.
+
 
 ## Estructura principal
 
