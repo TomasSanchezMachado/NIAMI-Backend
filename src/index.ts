@@ -7,6 +7,8 @@ import userRoutes from './routes/user.routes';
 import promotionRoutes from './routes/promotion.routes';
 import providerRoutes from './routes/provider.routes';
 import authRoutes from './routes/auth.routes';
+import OrderRoutes from './routes/order.routes';
+import OrderItemsRoutes from './routes/order-items.routes';
 import cors from 'cors';
 
 const main = async () => {
@@ -38,6 +40,8 @@ const main = async () => {
   apiRouter.use('/users', userRoutes);
   apiRouter.use('/promotions', promotionRoutes);
   apiRouter.use('/providers', providerRoutes);
+  apiRouter.use('/orders', OrderRoutes);
+  apiRouter.use('/order-items', OrderItemsRoutes);
 
   app.use('/api', apiRouter);
 
