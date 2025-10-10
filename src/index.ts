@@ -10,7 +10,7 @@ import authRoutes from './routes/auth.routes';
 import OrderRoutes from './routes/order.routes';
 import OrderItemsRoutes from './routes/order-items.routes';
 import cors from 'cors';
-
+import categoryRoutes from './routes/category.routes';
 const main = async () => {
 
   const app = express();
@@ -42,6 +42,7 @@ const main = async () => {
   apiRouter.use('/providers', providerRoutes);
   apiRouter.use('/orders', OrderRoutes);
   apiRouter.use('/order-items', OrderItemsRoutes);
+  app.use('/categories', categoryRoutes);
 
   app.use('/api', apiRouter);
 

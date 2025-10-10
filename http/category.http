@@ -1,0 +1,27 @@
+### Obtener todas las categorías
+GET http://localhost:3000/categories
+Content-Type: application/json
+
+### Obtener categoría por ID
+GET http://localhost:3000/categories/{id}
+Content-Type: application/json
+
+### Crear categoría
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{
+  "name": "Alimento"
+}
+
+### Actualizar categoría
+PUT http://localhost:3000/categories/{id}
+Content-Type: application/json
+
+{
+  "name": "Alimento 2"
+}
+
+### Eliminar categoría
+DELETE http://localhost:3000/categories/{id}
+Content-Type: application/json
