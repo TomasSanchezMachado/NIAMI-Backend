@@ -4,8 +4,8 @@ import { EntityManager } from '@mikro-orm/core';
 export class ProductService {
   constructor(private readonly em: EntityManager) {}
 
-  async createProduct(name: string) {
-    const product = new Product(name);
+  async createProduct(data: { name: string; price: number; image?: string }) {
+    const product = this.em.create(Product, data);
     await this.em.persistAndFlush(product);
     return product;
   }
@@ -18,11 +18,12 @@ export class ProductService {
     return this.em.findOne(Product, { id });
   }
 
-  async updateProduct(id: string, name: string) {
-    const product = await this.getProductById(id);
+  async updateProduct(id: string, data: Partial<{ name: string; price: number; image?: string }>) {
+    const product = await this.em.findOne(Product, { id });
     if (!product) return null;
-    product.name = name;
-    await this.em.persistAndFlush(product);
+
+    this.em.assign(product, data);
+    await this.em.flush();
     return product;
   }
 
