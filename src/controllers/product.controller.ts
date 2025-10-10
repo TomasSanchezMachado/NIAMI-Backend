@@ -10,9 +10,9 @@ export class ProductController {
   }
 
   createProduct = async (req: Request, res: Response) => {
-    const { name } = req.body;
+    const { name, price, category, image } = req.body; // 👈 tomamos todos los campos
     try {
-      const product = await this.service.createProduct(name);
+      const product = await this.service.createProduct({ name, price, image });
       res.json(product);
     } catch (err: any) {
       res.status(500).json({ error: err.message });
@@ -44,12 +44,12 @@ export class ProductController {
 
   updateProduct = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { name } = req.body;
-    if (typeof id !== 'string' || typeof name !== 'string') {
-      return res.status(400).json({ error: 'Invalid or missing product id or name' });
+    const { name, price, category, image } = req.body;
+    if (typeof id !== 'string') {
+      return res.status(400).json({ error: 'Invalid or missing product id' });
     }
     try {
-      const product = await this.service.updateProduct(id, name);
+      const product = await this.service.updateProduct(id, { name, price, image });
       if (!product) return res.status(404).json({ error: 'Product not found' });
       res.json(product);
     } catch (err: any) {
