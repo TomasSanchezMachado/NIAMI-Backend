@@ -1,5 +1,5 @@
 import { Product } from '../entities/Product';
-import { EntityManager } from '@mikro-orm/core';
+import { EntityManager, FilterQuery } from '@mikro-orm/core';
 
 export class ProductService {
   constructor(private readonly em: EntityManager) {}
@@ -10,8 +10,29 @@ export class ProductService {
     return product;
   }
 
-  async getAllProducts() {
-    return this.em.find(Product, {});
+  async getAllProducts(filters: any = {}) {
+    const where: FilterQuery<Product> = {};
+
+    // 🔹 Filtro por nombre (búsqueda parcial, insensible a mayúsculas)
+    if (filters.name) {
+      where.name = { $ilike: `%${filters.name}%` }; // PostgreSQL (usa $like si es SQLite)
+    }
+
+    // 🔹 Filtro por rango de precio
+    if (filters.minPrice || filters.maxPrice) {
+      where.price = {};
+      if (filters.minPrice) where.price.$gte = parseFloat(filters.minPrice);
+      if (filters.maxPrice) where.price.$lte = parseFloat(filters.maxPrice);
+    }
+
+    // 🔹 Filtro por ingredientes (si querés filtrar productos que tengan cierto ingrediente)
+    //if (filters.ingredient) {
+    //  where.ingredients = { name: { $ilike: `%${filters.ingredient}%` } };
+    //}
+
+    return this.em.find(Product, where, {
+      //populate: ['ingredients'], // opcional, si querés incluir ingredientes
+    });
   }
 
   async getProductById(id: string) {

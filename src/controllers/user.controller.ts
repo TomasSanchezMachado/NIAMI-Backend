@@ -23,9 +23,21 @@ export class UserController {
     }
   };
 
-  getAllUsers = async (_req: Request, res: Response) => {
+  getAllUsers = async (req: Request, res: Response) => {
     try {
-      const users = await this.service.getAllUsers();
+      const { name, role } = req.query;
+
+      // Validamos role si se pasó
+      if (role && role !== 'admin' && role !== 'customer') {
+        return res.status(400).json({ error: 'Invalid role filter' });
+      }
+
+      // Convertimos los filtros a tipo string si existen
+      const filters: { name?: string; role?: string } = {};
+      if (name && typeof name === 'string') filters.name = name;
+      if (role && typeof role === 'string') filters.role = role;
+
+      const users = await this.service.getAllUsers(filters);
       res.json(users);
     } catch (err: any) {
       res.status(500).json({ error: err.message });

@@ -42,7 +42,7 @@ const main = async () => {
   apiRouter.use('/providers', providerRoutes);
   apiRouter.use('/orders', OrderRoutes);
   apiRouter.use('/order-items', OrderItemsRoutes);
-  app.use('/categories', categoryRoutes);
+  apiRouter.use('/categories', categoryRoutes);
 
   app.use('/api', apiRouter);
 

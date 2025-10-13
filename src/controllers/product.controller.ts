@@ -19,9 +19,10 @@ export class ProductController {
     }
   };
 
-  getAllProducts = async (_req: Request, res: Response) => {
+  getAllProducts = async (req: Request, res: Response) => {
     try {
-      const products = await this.service.getAllProducts();
+      const filters = req.query;
+      const products = await this.service.getAllProducts(filters);
       res.json(products);
     } catch (err: any) {
       res.status(500).json({ error: err.message });
