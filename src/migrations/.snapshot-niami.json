@@ -65,8 +65,8 @@
           "nullable": false,
           "mappedType": "uuid"
         },
-        "name": {
-          "name": "name",
+        "description": {
+          "name": "description",
           "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
@@ -93,6 +93,15 @@
           "primary": false,
           "nullable": false,
           "mappedType": "float"
+        },
+        "category_id": {
+          "name": "category_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
         }
       },
       "name": "product",
@@ -110,7 +119,20 @@
         }
       ],
       "checks": [],
-      "foreignKeys": {},
+      "foreignKeys": {
+        "product_category_id_foreign": {
+          "constraintName": "product_category_id_foreign",
+          "columnNames": [
+            "category_id"
+          ],
+          "localTableName": "public.product",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.category",
+          "updateRule": "cascade"
+        }
+      },
       "nativeEnums": {}
     },
     {
@@ -152,6 +174,15 @@
           "nullable": false,
           "length": 0,
           "mappedType": "date"
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
         }
       },
       "name": "promotion",
@@ -169,7 +200,20 @@
         }
       ],
       "checks": [],
-      "foreignKeys": {},
+      "foreignKeys": {
+        "promotion_product_id_foreign": {
+          "constraintName": "promotion_product_id_foreign",
+          "columnNames": [
+            "product_id"
+          ],
+          "localTableName": "public.promotion",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.product",
+          "updateRule": "cascade"
+        }
+      },
       "nativeEnums": {}
     },
     {

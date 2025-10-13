@@ -1,31 +1,34 @@
-### Obtener todos los productos
-GET http://localhost:3000/products
-Content-Type: application/json
-
-### Obtener producto por ID
-GET http://localhost:3000/products/1
-Content-Type: application/json
-
 ### Crear producto
-POST http://localhost:3000/products
+POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "name": "Hamburguesa Clásica",
-  "price": 1200,
-  "description": "Hamburguesa con carne, queso y lechuga"
+  "description": "Cheeseburger",
+  "price": 5.99,
+  "image": "https://example.com/cheeseburger.jpg",
+  "categoryId": "f7247199-81ec-4296-a44a-4da401162dda",
+  "ingredientIds": ["<uuid-ingrediente-1>", "<uuid-ingrediente-2>"],
+  "promotionIds": ["<uuid-promocion-1>"]
 }
 
 ### Actualizar producto
-PUT http://localhost:3000/products/95b8f8cb-ab75-45d1-b70b-b64d68b4eaf2
+PUT http://localhost:3000/api/products/<uuid-del-producto>
 Content-Type: application/json
 
 {
-  "name": "Hamburguesa Doble",
-  "price": 1500,
-  "description": "Hamburguesa doble carne con queso cheddar"
+  "description": "Cheeseburger Deluxe",
+  "price": 6.99,
+  "image": "https://example.com/cheeseburger-deluxe.jpg",
+  "categoryId": "f7247199-81ec-4296-a44a-4da401162dda",
+  "ingredientIds": ["<uuid-ingrediente-1>", "<uuid-ingrediente-3>"],
+  "promotionIds": ["<uuid-promocion-2>"]
 }
 
+### Obtener todos los productos
+GET http://localhost:3000/api/products
+
+### Obtener producto por id
+GET http://localhost:3000/api/products/<uuid-del-producto>
+
 ### Eliminar producto
-DELETE http://localhost:3000/products/1
-Content-Type: application/json
+DELETE http://localhost:3000/api/products/<uuid-del-producto>

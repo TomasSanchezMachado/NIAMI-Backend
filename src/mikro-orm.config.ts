@@ -7,7 +7,6 @@ import { Category } from './entities/Category';
 import { Provider } from './entities/Provider';
 import { Order } from './entities/Order';
 import { OrderItem } from './entities/OrderItem';
-import { Supplier } from './entities/Supplier';
 import { Promotion } from './entities/Promotion';
 
 import dotenv from 'dotenv';
@@ -20,7 +19,7 @@ const config: Options<PostgreSqlDriver> = {
   user: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || 'postgres',
   dbName: process.env.DB_NAME || 'niami',
-  entities: [User, Product, Ingredient, Category, Provider, Promotion, Order, OrderItem, Supplier],
+  entities: [User, Product, Ingredient, Category, Provider, Promotion, Order, OrderItem],
   migrations: {
     path: './src/migrations', // carpeta donde se guardarán las migraciones
     tableName: 'mikro_orm_migrations',

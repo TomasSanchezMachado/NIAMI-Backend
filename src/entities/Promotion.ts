@@ -1,4 +1,5 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property, ManyToOne } from '@mikro-orm/core';
+import { Product } from './Product';
 import { v4 } from 'uuid';
 
 @Entity()
@@ -14,4 +15,8 @@ export class Promotion {
 
   @Property({ type: 'date' })
   createdAt: Date = new Date();
+
+  // Many-to-one: Promotion -> Product
+  @ManyToOne(() => Product)
+  product!: Product;
 }
