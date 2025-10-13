@@ -44,7 +44,7 @@ export class ProductService {
 
     // 🔹 Filtro por nombre (búsqueda parcial, insensible a mayúsculas)
     if (filters.name) {
-      where.name = { $ilike: `%${filters.name}%` }; // PostgreSQL (usa $like si es SQLite)
+      where.description = { $ilike: `%${filters.name}%` }; // PostgreSQL (usa $like si es SQLite)
     }
 
     // 🔹 Filtro por rango de precio
