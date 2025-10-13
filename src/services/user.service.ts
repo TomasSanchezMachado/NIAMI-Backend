@@ -19,9 +19,21 @@ export class UserService {
     return user;
   }
 
-  async getAllUsers() {
-    return this.em.find(User, {});
-  }
+  getAllUsers = async (filters?: { name?: string; role?: string }) => {
+    const where: any = {};
+
+    // Filtro por nombre (LIKE)
+    if (filters?.name) {
+      where.name = { $ilike: `%${filters.name}%` };
+    }
+
+    // Filtro por rol exacto
+    if (filters?.role) {
+      where.role = filters.role;
+    }
+
+    return this.em.find(User, where);
+  };
 
   async getUserById(id: string) {
     return this.em.findOne(User, { id });
