@@ -10,12 +10,12 @@ export class PromotionController {
   }
 
   createPromotion = async (req: Request, res: Response) => {
-    const { name, discountPercent } = req.body;
-    if (typeof name !== 'string' || typeof discountPercent !== 'number') {
-      return res.status(400).json({ error: 'Invalid or missing promotion fields (name, discountPercent)' });
+    const { description, discount, startDate, endDate, productId } = req.body;
+    if (typeof description !== 'string' || typeof discount !== 'number' || !startDate || !endDate) {
+      return res.status(400).json({ error: 'Invalid or missing promotion fields (description, discount, startDate, endDate)'});
     }
     try {
-      const promotion = await this.service.createPromotion({ name, discountPercent });
+      const promotion = await this.service.createPromotion({ description, discount, startDate: new Date(startDate), endDate: new Date(endDate), productId });
       res.json(promotion);
     } catch (err: any) {
       res.status(500).json({ error: err.message });
@@ -47,12 +47,26 @@ export class PromotionController {
 
   updatePromotion = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { name, discountPercent } = req.body;
+    const { description, discount, startDate, endDate, productId } = req.body;
     if (typeof id !== 'string') {
       return res.status(400).json({ error: 'Invalid or missing promotion id' });
     }
     try {
-      const promotion = await this.service.updatePromotion(id, { name, discountPercent });
+      const updateData: Partial<{
+        description: string;
+        discount: number;
+        startDate?: Date;
+        endDate?: Date;
+        productId?: string;
+      }> = {
+        description,
+        discount,
+        productId
+      };
+      if (startDate) updateData.startDate = new Date(startDate);
+      if (endDate) updateData.endDate = new Date(endDate);
+
+      const promotion = await this.service.updatePromotion(id, updateData);
       if (!promotion) return res.status(404).json({ error: 'Promotion not found' });
       res.json(promotion);
     } catch (err: any) {

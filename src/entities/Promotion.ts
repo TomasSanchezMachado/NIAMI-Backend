@@ -8,13 +8,16 @@ export class Promotion {
   id: string = v4();
 
   @Property({ type: 'string' })
-  name!: string;
+  description!: string;
 
   @Property({ type: 'number' })
-  discountPercent!: number;
+  discount!: number;
 
   @Property({ type: 'date' })
-  createdAt: Date = new Date();
+  startDate!: Date;
+
+  @Property({ type: 'date' })
+  endDate!: Date;
 
   // Many-to-one: Promotion -> Product
   @ManyToOne(() => Product)

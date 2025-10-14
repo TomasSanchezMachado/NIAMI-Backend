@@ -10,12 +10,12 @@ export class ProviderController {
   }
 
   createProvider = async (req: Request, res: Response) => {
-    const { name } = req.body;
+    const { name, address, phone, email } = req.body;
     if (typeof name !== 'string') {
       return res.status(400).json({ error: 'Invalid or missing provider name' });
     }
     try {
-      const provider = await this.service.createProvider({ name });
+      const provider = await this.service.createProvider({ name, address, phone, email });
       res.json(provider);
     } catch (err: any) {
       res.status(500).json({ error: err.message });
@@ -47,12 +47,12 @@ export class ProviderController {
 
   updateProvider = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, address, phone, email } = req.body;
     if (typeof id !== 'string') {
       return res.status(400).json({ error: 'Invalid or missing provider id' });
     }
     try {
-      const provider = await this.service.updateProvider(id, { name });
+      const provider = await this.service.updateProvider(id, { name, address, phone, email });
       if (!provider) return res.status(404).json({ error: 'Provider not found' });
       res.json(provider);
     } catch (err: any) {

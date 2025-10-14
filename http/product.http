@@ -7,7 +7,7 @@ Content-Type: application/json
   "price": 5.99,
   "image": "https://example.com/cheeseburger.jpg",
   "categoryId": "f7247199-81ec-4296-a44a-4da401162dda",
-  "ingredientIds": ["<uuid-ingrediente-1>", "<uuid-ingrediente-2>"],
+  "ingredientIds": ["d055bfee-9a7c-42fa-91db-74e7a0bee786"],
   "promotionIds": ["<uuid-promocion-1>"]
 }
 

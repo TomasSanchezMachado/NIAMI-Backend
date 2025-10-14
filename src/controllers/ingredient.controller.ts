@@ -10,9 +10,9 @@ export class IngredientController {
   }
 
   createIngredient = async (req: Request, res: Response) => {
-    const { name } = req.body;
+    const { description, providerId, productIds } = req.body;
     try {
-      const ingredient = await this.service.createIngredient(name);
+      const ingredient = await this.service.createIngredient({ description, providerId, productIds });
       res.json(ingredient);
     } catch (err: any) {
       res.status(500).json({ error: err.message });
@@ -44,12 +44,12 @@ export class IngredientController {
 
   updateIngredient = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { name } = req.body;
-    if (typeof id !== 'string' || typeof name !== 'string') {
-      return res.status(400).json({ error: 'Invalid or missing ingredient id or name' });
+    const { description, providerId, productIds } = req.body;
+    if (typeof id !== 'string') {
+      return res.status(400).json({ error: 'Invalid or missing ingredient id' });
     }
     try {
-      const ingredient = await this.service.updateIngredient(id, name);
+      const ingredient = await this.service.updateIngredient(id, { description, providerId, productIds });
       if (!ingredient) return res.status(404).json({ error: 'Ingredient not found' });
       res.json(ingredient);
     } catch (err: any) {

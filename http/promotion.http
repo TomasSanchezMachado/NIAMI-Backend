@@ -1,29 +1,46 @@
+POST http://localhost:3000/api/promotions
+Content-Type: application/json
+
+{
+  "description": "Promo sin producto",
+  "discount": 15,
+  "startDate": "2025-10-15",
+  "endDate": "2025-10-31",
+  "productId": "5183b3ec-c3dd-46eb-abe3-95d10651afd3"
+}
+
 ### Obtener todas las promociones
-GET http://localhost:3000/promotions
+GET http://localhost:3000/api/promotions
 Content-Type: application/json
 
 ### Obtener promoción por ID
-GET http://localhost:3000/promotions/1
+GET http://localhost:3000/api/promotions/<uuid-del-promotion>
 Content-Type: application/json
 
 ### Crear promoción
-POST http://localhost:3000/promotions
+POST http://localhost:3000/api/promotions
 Content-Type: application/json
 
 {
-  "name": "Promo 2x1",
-  "discountPercent": 50
+  "description": "2x1 Promo",
+  "discount": 50,
+  "startDate": "2025-10-15T00:00:00.000Z",
+  "endDate": "2025-10-31T23:59:59.000Z",
+  "productId": "<uuid-del-producto>"
 }
 
 ### Actualizar promoción
-PUT http://localhost:3000/promotions/2c3faf66-b6f0-4fa4-996f-6e406d38eb13
+PUT http://localhost:3000/api/promotions/<uuid-del-promotion>
 Content-Type: application/json
 
 {
-  "name": "Promo 3x2",
-  "discountPercent": 33
+  "description": "3x2 Promo",
+  "discount": 33,
+  "startDate": "2025-11-01T00:00:00.000Z",
+  "endDate": "2025-11-15T23:59:59.000Z",
+  "productId": "<uuid-del-producto>"
 }
 
 ### Eliminar promoción
-DELETE http://localhost:3000/promotions/1
+DELETE http://localhost:3000/api/promotions/<uuid-del-promotion>
 Content-Type: application/json

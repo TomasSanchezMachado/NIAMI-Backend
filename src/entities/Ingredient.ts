@@ -10,19 +10,19 @@ export class Ingredient {
   id: string = v4();
 
   @Property()
-  name: string;
+  description: string;
 
 
-  // Ingredient es el lado inverso, usamos mappedBy
+  // Many-to-many: Ingredient <-> Product
   @ManyToMany(() => Product, undefined, { mappedBy: 'ingredients' })
   products = new Collection<Product>(this);
 
-  // Relación ManyToOne: cada ingrediente tiene un proveedor
+  // Many-to-one: Ingredient -> Provider
   @ManyToOne(() => Provider)
   provider!: Provider;
 
-  constructor(name: string, provider: Provider) {
-    this.name = name;
+  constructor(description: string, provider: Provider) {
+    this.description = description;
     this.provider = provider;
   }
 }

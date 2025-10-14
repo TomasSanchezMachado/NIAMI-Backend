@@ -1,27 +1,40 @@
+### Crear ingrediente sin productos
+POST http://localhost:3000/api/ingredients
+Content-Type: application/json
+
+{
+  "description": "Queso Cheddar",
+  "providerId": "f9da6e3b-1f5e-406f-a663-40f983ee6358"
+}
+
 ### Obtener todos los ingredientes
-GET http://localhost:3000/ingredients
+GET http://localhost:3000/api/ingredients
 Content-Type: application/json
 
 ### Obtener ingrediente por ID
-GET http://localhost:3000/ingredients/1
+GET http://localhost:3000/api/ingredients/<uuid-del-ingrediente>
 Content-Type: application/json
 
 ### Crear ingrediente
-POST http://localhost:3000/ingredients
+POST http://localhost:3000/api/ingredients
 Content-Type: application/json
 
 {
-  "name": "Queso Cheddar"
+  "description": "Cheddar Cheese",
+  "providerId": "f9da6e3b-1f5e-406f-a663-40f983ee6358",
+  "productIds": ["<uuid-producto-1>", "<uuid-producto-2>"]
 }
 
 ### Actualizar ingrediente
-PUT http://localhost:3000/ingredients/cf70facd-3da8-4ef1-a4c0-84fa4f04210c
+PUT http://localhost:3000/api/ingredients/<uuid-del-ingrediente>
 Content-Type: application/json
 
 {
-  "name": "Queso Azul"
+  "description": "Blue Cheese",
+  "providerId": "<uuid-del-proveedor>",
+  "productIds": ["<uuid-producto-1>"]
 }
 
 ### Eliminar ingrediente
-DELETE http://localhost:3000/ingredients/1
+DELETE http://localhost:3000/api/ingredients/<uuid-del-ingrediente>
 Content-Type: application/json

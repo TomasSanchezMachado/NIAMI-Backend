@@ -1,27 +1,33 @@
 ### Obtener todos los proveedores
-GET http://localhost:3000/providers
+GET http://localhost:3000/api/providers
 Content-Type: application/json
 
 ### Obtener proveedor por ID
-GET http://localhost:3000/providers/1
+GET http://localhost:3000/api/providers/f9da6e3b-1f5e-406f-a663-40f983ee6358
 Content-Type: application/json
 
 ### Crear proveedor
-POST http://localhost:3000/providers
+POST http://localhost:3000/api/providers
 Content-Type: application/json
 
 {
-  "name": "Proveedor Ejemplo"
+  "name": "Example Provider",
+  "address": "123 Main St",
+  "phone": "555-1234",
+  "email": "provider@example.com"
 }
 
 ### Actualizar proveedor
-PUT http://localhost:3000/providers/d5258352-942c-4957-a32d-96348ff3bede
+PUT http://localhost:3000/api/providers/f9da6e3b-1f5e-406f-a663-40f983ee6358
 Content-Type: application/json
 
 {
-  "name": "Proveedor Actualizado"
+  "name": "Updated Provider",
+  "address": "456 New St",
+  "phone": "555-5678",
+  "email": "updated@example.com"
 }
 
 ### Eliminar proveedor
-DELETE http://localhost:3000/providers/1
+DELETE http://localhost:3000/api/providers/<uuid-del-proveedor>
 Content-Type: application/json
