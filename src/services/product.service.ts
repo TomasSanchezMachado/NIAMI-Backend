@@ -11,11 +11,11 @@ export class ProductService {
     description: string;
     price: number;
     image?: string;
-    categoryId: string;
+    category_id: string;
     ingredientIds?: string[];
     promotionIds?: string[];
   }) {
-    const category = await this.em.findOne(Category, { id: data.categoryId });
+    const category = await this.em.findOne(Category, { id: data.category_id });
     if (!category) throw new Error('Category not found');
 
     const product = new Product(data.description, data.price, category, data.image);

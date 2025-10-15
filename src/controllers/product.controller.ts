@@ -10,9 +10,9 @@ export class ProductController {
   }
 
   createProduct = async (req: Request, res: Response) => {
-    const { description, price, categoryId, image, ingredientIds, promotionIds } = req.body;
+    const { description, price, category_id, image, ingredientIds, promotionIds } = req.body;
     try {
-      const product = await this.service.createProduct({ description, price, image, categoryId, ingredientIds, promotionIds });
+      const product = await this.service.createProduct({ description, price, image, category_id, ingredientIds, promotionIds });
       res.json(product);
     } catch (err: any) {
       res.status(500).json({ error: err.message });
