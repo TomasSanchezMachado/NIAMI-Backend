@@ -22,9 +22,10 @@ export class CategoryController {
     }
   };
 
-  getAllCategories = async (_req: Request, res: Response) => {
+  getAllCategories = async (req: Request, res: Response) => {
     try {
-      const categories = await this.service.getAllCategories();
+      const filters = req.query;
+      const categories = await this.service.getAllCategories(filters);
       res.json(categories);
     } catch (err: any) {
       res.status(500).json({ error: err.message });

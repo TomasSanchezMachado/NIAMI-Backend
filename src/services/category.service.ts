@@ -1,13 +1,21 @@
 import { Category } from '../entities/Category';
-import { EntityManager } from '@mikro-orm/core';
+import { EntityManager, FilterQuery } from '@mikro-orm/core';
 
 export class CategoryService {
   constructor(private readonly em: EntityManager) {}
 
   // Obtener todas las categorías
-  async getAllCategories() {
-    return this.em.find(Category, {});
+  async getAllCategories(filters: any = {}) {
+    const where: FilterQuery<Category> = {};
+
+    // 🔹 Filtro por nombre (parcial, insensible a mayúsculas)
+    if (filters.name) {
+      where.name = { $ilike: `%${filters.name}%` }; // PostgreSQL
+    }
+
+    return this.em.find(Category, where);
   }
+
 
   // Obtener una categoría por su ID
   async getCategoryById(id: string) {
