@@ -1,0 +1,31 @@
+### Crear order item
+POST http://localhost:3000/api/order-items
+Content-Type: application/json
+
+{
+  "order_id": "<uuid-order>",
+  "product_id": "<uuid-product>",
+  "quantity": 2,
+  "description": "Extra cheese",
+  "price": 2.5
+}
+
+### Obtener order items (todos o por order id)
+GET http://localhost:3000/api/order-items
+
+### Obtener order item por id
+GET http://localhost:3000/api/order-items/<uuid-order-item>
+
+### Actualizar order item
+PUT http://localhost:3000/api/order-items/<uuid-order-item>
+Content-Type: application/json
+
+{
+  "quantity": 3,
+  "description": "Sin cebolla",
+  "price": 3.0
+}
+
+### Eliminar order item
+DELETE http://localhost:3000/api/order-items/<uuid-order-item>
+Content-Type: application/json

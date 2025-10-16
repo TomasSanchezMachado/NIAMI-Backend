@@ -9,12 +9,14 @@ export class UserService {
     return this.em.findOne(User, { email });
   }
 
-  async createUser({ name, email, password, role }: { name: string; email: string; password: string; role: 'admin' | 'customer' }) {
+  async createUser({ name, email, password, role, address, phone }: { name: string; email: string; password: string; role: 'admin' | 'customer'; address?: string; phone?: string }) {
     const user = new User();
     user.name = name;
     user.email = email;
     user.password = password;
     user.role = role;
+    if (address !== undefined) user.address = address;
+    if (phone !== undefined) user.phone = phone;
     await this.em.persistAndFlush(user);
     return user;
   }
@@ -39,13 +41,15 @@ export class UserService {
     return this.em.findOne(User, { id });
   }
 
-  async updateUser(id: string, { name, email, password, role }: { name?: string; email?: string; password?: string; role?: 'admin' | 'customer' }) {
+  async updateUser(id: string, { name, email, password, role, address, phone }: { name?: string; email?: string; password?: string; role?: 'admin' | 'customer'; address?: string; phone?: string }) {
     const user = await this.getUserById(id);
     if (!user) return null;
     if (name !== undefined) user.name = name;
     if (email !== undefined) user.email = email;
     if (password !== undefined) user.password = password;
     if (role !== undefined) user.role = role;
+    if (address !== undefined) user.address = address;
+    if (phone !== undefined) user.phone = phone;
     await this.em.persistAndFlush(user);
     return user;
   }

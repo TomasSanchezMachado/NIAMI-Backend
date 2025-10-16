@@ -1,11 +1,9 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
-import { v4 } from 'uuid';
+import { Entity, Property, OneToMany, Collection } from '@mikro-orm/core';
+import { BaseEntity } from './BaseEntity';
+import { Order } from './Order';
 
 @Entity()
-export class User {
-
-  @PrimaryKey()
-  id: string = v4();
+export class User extends BaseEntity {
 
   @Property()
   name!: string;
@@ -18,4 +16,13 @@ export class User {
 
   @Property()
   role!: 'admin' | 'customer';
+
+  @Property({ nullable: true })
+  address?: string;
+
+  @Property({ nullable: true })
+  phone?: string;
+
+  @OneToMany(() => Order, order => order.user)
+  orders = new Collection<Order>(this);
 }

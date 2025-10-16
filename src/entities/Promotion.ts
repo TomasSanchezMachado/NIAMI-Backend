@@ -1,12 +1,9 @@
-import { Entity, PrimaryKey, Property, ManyToOne } from '@mikro-orm/core';
+import { Entity, Property, ManyToOne } from '@mikro-orm/core';
+import { BaseEntity } from './BaseEntity';
 import { Product } from './Product';
-import { v4 } from 'uuid';
 
 @Entity()
-export class Promotion {
-  @PrimaryKey({ type: 'uuid' })
-  id: string = v4();
-
+export class Promotion extends BaseEntity {
   @Property({ type: 'string' })
   description!: string;
 

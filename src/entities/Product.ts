@@ -1,14 +1,13 @@
-import { Entity, PrimaryKey, Property, ManyToMany, ManyToOne, OneToMany, Collection } from '@mikro-orm/core';
+
+import { Entity, Property, ManyToMany, ManyToOne, OneToMany, Collection } from '@mikro-orm/core';
+import { BaseEntity } from './BaseEntity';
 import { Ingredient } from './Ingredient';
 import { Category } from './Category';
 import { Promotion } from './Promotion';
 import { OrderItem } from './OrderItem';
-import { v4 } from 'uuid';
 
 @Entity()
-export class Product {
-  @PrimaryKey({ type: 'uuid' })
-  id: string = v4();
+export class Product extends BaseEntity {
 
   @Property()
   description: string;
@@ -34,8 +33,8 @@ export class Product {
   // Many-to-many: Product <-> Ingredient
   @ManyToMany(() => Ingredient, ingredient => ingredient.products)
   ingredients = new Collection<Ingredient>(this);
-
   constructor(description: string, price: number, category: Category, image?: string) {
+    super();
     this.description = description;
     this.price = price;
     this.category = category;

@@ -1,12 +1,9 @@
-import { Entity, PrimaryKey, Property, OneToMany, Collection } from '@mikro-orm/core';
+import { Entity, Property, OneToMany, Collection } from '@mikro-orm/core';
+import { BaseEntity } from './BaseEntity';
 import { Ingredient } from './Ingredient';
-import { v4 } from 'uuid';
 
 @Entity()
-export class Provider {
-  @PrimaryKey({ type: 'uuid' })
-  id: string = v4();
-
+export class Provider extends BaseEntity {
   @Property({ type: 'string' })
   name!: string;
 
@@ -18,9 +15,6 @@ export class Provider {
 
   @Property({ type: 'string', nullable: true })
   email?: string | undefined;
-
-  @Property({ type: 'date' })
-  createdAt: Date = new Date();
 
   // One-to-many: Provider -> Ingredient
   @OneToMany(() => Ingredient, ingredient => ingredient.provider)

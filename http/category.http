@@ -1,13 +1,13 @@
 ### Obtener todas las categorías
-GET http://localhost:3000/categories
+GET http://localhost:3000/api/categories
 Content-Type: application/json
 
 ### Obtener categoría por ID
-GET http://localhost:3000/categories/{id}
+GET http://localhost:3000/api/categories/{id}
 Content-Type: application/json
 
 ### Crear categoría
-POST http://localhost:3000/categories
+POST http://localhost:3000/api/categories
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ### Actualizar categoría
-PUT http://localhost:3000/categories/{id}
+PUT http://localhost:3000/api/categories/{id}
 Content-Type: application/json
 
 {
@@ -23,5 +23,5 @@ Content-Type: application/json
 }
 
 ### Eliminar categoría
-DELETE http://localhost:3000/categories/{id}
+DELETE http://localhost:3000/api/categories/{id}
 Content-Type: application/json

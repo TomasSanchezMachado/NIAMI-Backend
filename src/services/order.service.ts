@@ -6,14 +6,15 @@ export class OrderService {
   constructor(private readonly em: EntityManager) {}
 
   // Crear un pedido
-  async createOrder({ user_id, status }: { user_id: string; status: "pending" | "completed" | "canceled" }) {
+  async createOrder({ user_id, status, description, totalPrice }: { user_id: string; status: "pending" | "completed" | "canceled"; description?: string; totalPrice?: number }) {
     const user = await this.em.findOne(User, { id: user_id });
     if (!user) throw new Error('User not found');
 
-    const order = new Order();
+  const order = new Order();
     order.user = user;       // asignamos el objeto User
     order.status = status;
-    order.createdAt = new Date();
+  if (description !== undefined) order.description = description;
+  if (totalPrice !== undefined) order.totalPrice = totalPrice;
 
     await this.em.persistAndFlush(order);
     return order;
@@ -32,7 +33,7 @@ export class OrderService {
   // Actualizar un pedido
   async updateOrder(
     id: string,
-    { user_id, status }: { user_id?: string; status?: "pending" | "completed" | "canceled" }
+    { user_id, status, description, totalPrice }: { user_id?: string; status?: "pending" | "completed" | "canceled"; description?: string; totalPrice?: number }
   ) {
     const order = await this.getOrderById(id);
     if (!order) return null;
@@ -44,6 +45,8 @@ export class OrderService {
     }
 
     if (status !== undefined) order.status = status;
+  if (description !== undefined) order.description = description;
+  if (totalPrice !== undefined) order.totalPrice = totalPrice;
 
     await this.em.persistAndFlush(order);
     return order;

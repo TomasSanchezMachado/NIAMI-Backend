@@ -1,0 +1,33 @@
+### Crear pedido
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "user_id": "<uuid-de-usuario>",
+  "status": "pending",
+  "description": "Orden para entrega",
+  "totalPrice": 12.5
+}
+
+### Obtener todos los pedidos
+GET http://localhost:3000/api/orders
+Content-Type: application/json
+
+### Obtener pedido por ID
+GET http://localhost:3000/api/orders/<uuid-del-pedido>
+Content-Type: application/json
+
+### Actualizar pedido
+PUT http://localhost:3000/api/orders/<uuid-del-pedido>
+Content-Type: application/json
+
+{
+  "status": "completed",
+  "description": "Orden entregada",
+  "totalPrice": 15.0
+}
+
+### Eliminar pedido
+DELETE http://localhost:3000/api/orders/<uuid-del-pedido>
+Content-Type: application/json
+

@@ -11,12 +11,18 @@ export class UserController {
 
 
   createUser = async (req: Request, res: Response) => {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role, address, phone } = req.body;
     if (typeof name !== 'string' || typeof email !== 'string' || typeof password !== 'string' || (role !== 'admin' && role !== 'customer')) {
       return res.status(400).json({ error: 'Invalid or missing user fields (name, email, password, role)' });
     }
+    if (address !== undefined && typeof address !== 'string') {
+      return res.status(400).json({ error: 'Invalid address' });
+    }
+    if (phone !== undefined && typeof phone !== 'string') {
+      return res.status(400).json({ error: 'Invalid phone' });
+    }
     try {
-      const user = await this.service.createUser({ name, email, password, role });
+      const user = await this.service.createUser({ name, email, password, role, address, phone });
       res.json(user);
     } catch (err: any) {
       res.status(500).json({ error: err.message });
@@ -60,15 +66,21 @@ export class UserController {
 
   updateUser = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role, address, phone } = req.body;
     if (typeof id !== 'string') {
       return res.status(400).json({ error: 'Invalid or missing user id' });
     }
     if (role !== undefined && role !== 'admin' && role !== 'customer') {
       return res.status(400).json({ error: 'Invalid role value' });
     }
+    if (address !== undefined && typeof address !== 'string') {
+      return res.status(400).json({ error: 'Invalid address' });
+    }
+    if (phone !== undefined && typeof phone !== 'string') {
+      return res.status(400).json({ error: 'Invalid phone' });
+    }
     try {
-      const user = await this.service.updateUser(id, { name, email, password, role });
+      const user = await this.service.updateUser(id, { name, email, password, role, address, phone });
       if (!user) return res.status(404).json({ error: 'User not found' });
       res.json(user);
     } catch (err: any) {

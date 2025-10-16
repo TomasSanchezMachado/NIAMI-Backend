@@ -11,7 +11,7 @@ export class OrderController {
 
   // Crear un pedido
   createOrder = async (req: Request, res: Response) => {
-    const { user_id, status } = req.body;
+    const { user_id, status, description, totalPrice } = req.body;
 
     // Validación básica
     if (typeof user_id !== 'string' || typeof status !== 'string') {
@@ -23,8 +23,16 @@ export class OrderController {
       return res.status(400).json({ error: 'Invalid status value' });
     }
 
+    if (description !== undefined && typeof description !== 'string') {
+      return res.status(400).json({ error: 'Invalid description' });
+    }
+
+    if (totalPrice !== undefined && typeof totalPrice !== 'number') {
+      return res.status(400).json({ error: 'Invalid totalPrice' });
+    }
+
     try {
-      const order = await this.service.createOrder({ user_id, status: status as 'pending' | 'completed' | 'canceled' });
+      const order = await this.service.createOrder({ user_id, status: status as 'pending' | 'completed' | 'canceled', description, totalPrice });
       res.json(order);
     } catch (err: any) {
       res.status(500).json({ error: err.message });
@@ -60,7 +68,7 @@ export class OrderController {
   // Actualizar un pedido
   updateOrder = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { user_id, status } = req.body;
+    const { user_id, status, description, totalPrice } = req.body;
 
     if (typeof id !== 'string') {
       return res.status(400).json({ error: 'Invalid or missing order id' });
@@ -70,10 +78,20 @@ export class OrderController {
       return res.status(400).json({ error: 'Invalid status value' });
     }
 
+    if (description !== undefined && typeof description !== 'string') {
+      return res.status(400).json({ error: 'Invalid description' });
+    }
+
+    if (totalPrice !== undefined && typeof totalPrice !== 'number') {
+      return res.status(400).json({ error: 'Invalid totalPrice' });
+    }
+
     try {
       const order = await this.service.updateOrder(id, { 
         user_id, 
-        status: status as 'pending' | 'completed' | 'canceled' 
+        status: status as 'pending' | 'completed' | 'canceled',
+        description,
+        totalPrice,
       });
       if (!order) return res.status(404).json({ error: 'Order not found' });
       res.json(order);

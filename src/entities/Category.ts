@@ -1,14 +1,8 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
-import { v4 } from 'uuid';
+import { Entity, Property } from '@mikro-orm/core';
+import { BaseEntity } from './BaseEntity';
 
 @Entity()
-export class Category {
-  @PrimaryKey({ type: 'uuid' })
-  id: string = v4();
-
+export class Category extends BaseEntity {
   @Property({ type: 'string' })
   name!: string;
-
-  @Property({ type: 'date' })
-  createdAt: Date = new Date();
 }
