@@ -59,7 +59,7 @@ export class ProductService {
     //  where.ingredients = { name: { $ilike: `%${filters.ingredient}%` } };
     //}
 
-    return this.em.find(Product, {}, { populate: ['category', 'ingredients', 'promotions', 'orderItems'] });
+    return this.em.find(Product, where, { populate: ['category', 'ingredients', 'promotions', 'orderItems'] });
 
   }
 
