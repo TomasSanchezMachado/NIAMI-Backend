@@ -21,8 +21,10 @@ export class OrderService {
   }
 
   // Obtener todos los pedidos
-  async getAllOrders() {
-    return this.em.find(Order, {});
+  async getAllOrders(filters: any = {}) {
+    return this.em.find(Order, filters, {
+      populate: ['user', 'items', 'items.product'],
+    });
   }
 
   // Obtener pedido por ID

@@ -40,9 +40,15 @@ export class OrderController {
   };
 
   // Obtener todos los pedidos
-  getAllOrders = async (_req: Request, res: Response) => {
+  getAllOrders = async (req: Request, res: Response) => {
     try {
-      const orders = await this.service.getAllOrders();
+      const { user_id, status } = req.query;
+
+      const filters: any = {};
+      if (user_id) filters.user = user_id; // o "user_id" según cómo esté mapeado en la entidad
+      if (status) filters.status = status;
+
+      const orders = await this.service.getAllOrders(filters);
       res.json(orders);
     } catch (err: any) {
       res.status(500).json({ error: err.message });
