@@ -11,6 +11,7 @@ import authRoutes from './routes/auth.routes';
 import OrderRoutes from './routes/order.routes';
 import OrderItemsRoutes from './routes/order-items.routes';
 import categoryRoutes from './routes/category.routes';
+import mailRoutes from './routes/mail.routes';
 
 const main = async () => {
 
@@ -44,9 +45,9 @@ const main = async () => {
   apiRouter.use('/orders', OrderRoutes);
   apiRouter.use('/order-items', OrderItemsRoutes);
   apiRouter.use('/categories', categoryRoutes);
+  apiRouter.use('/mail', mailRoutes);
 
   app.use('/api', apiRouter);
-
 
   app.listen(3000, () => console.log('Server running on port 3000'));
 };

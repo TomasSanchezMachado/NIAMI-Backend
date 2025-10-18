@@ -1,4 +1,4 @@
-import { nodemailer } from 'nodemailer';
+import nodemailer from 'nodemailer'
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 
 export async function sendMail(to: string, subject: string, text: string, html?: string) {
   const mailOptions = {
-    from: '"Niami" <niamidsw@gmail.com>',
+    from: '"Node Mail Tester" <niamidsw@gmail.com>',
     to,
     subject,
     text,
