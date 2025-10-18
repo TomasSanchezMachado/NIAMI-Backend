@@ -1,5 +1,6 @@
 import { MikroORM, RequestContext } from '@mikro-orm/core';
 import express from 'express';
+import cors from 'cors';
 import mikroOrmConfig from './mikro-orm.config';
 import productRoutes from './routes/product.routes';
 import ingredientRoutes from './routes/ingredient.routes';
@@ -9,8 +10,8 @@ import providerRoutes from './routes/provider.routes';
 import authRoutes from './routes/auth.routes';
 import OrderRoutes from './routes/order.routes';
 import OrderItemsRoutes from './routes/order-items.routes';
-import cors from 'cors';
 import categoryRoutes from './routes/category.routes';
+
 const main = async () => {
 
   const app = express();
@@ -18,7 +19,7 @@ const main = async () => {
 
   const orm = await MikroORM.init(mikroOrmConfig);
 
-  // ⚡ Cors debe ir antes de las rutas
+  // Cors debe ir antes de las rutas
   app.use(cors({
     origin: 'http://localhost:5173', // origen de tu front
     methods: ['GET','POST','PUT','DELETE'],
