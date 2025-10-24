@@ -4,5 +4,5 @@ Content-Type: application/json
 {
   "to": "juanpabloruizbre@gmail.com",
   "subject": "Correo de prueba local",
-  "text": "Hola! Este es un correo enviado desde mi entorno local usando Node.js + Gmail."
+  "text": "Hola! Este es un correo de pruebas."
 }
