@@ -16,17 +16,15 @@ export class ProductService {
     promotionIds?: string[];
   }) {
     const category = await this.em.findOne(Category, { id: data.category_id });
-    if (!category) throw new Error('Category not found');
+    if (!category) throw new Error('Categoria no encontranda');
 
     const product = new Product(data.description, data.price, category, data.image);
 
-    // Asociar ingredientes si se proporcionan
     if (data.ingredientIds && data.ingredientIds.length > 0) {
       const ingredients = await this.em.find(Ingredient, { id: { $in: data.ingredientIds } });
       product.ingredients.add(ingredients);
     }
 
-    // Asociar promociones si se proporcionan
     if (data.promotionIds && data.promotionIds.length > 0) {
       const promotions = await this.em.find(Promotion, { id: { $in: data.promotionIds } });
       for (const promo of promotions) {
@@ -42,22 +40,15 @@ export class ProductService {
   async getAllProducts(filters: any = {}) {
     const where: FilterQuery<Product> = {};
 
-    // 🔹 Filtro por nombre (búsqueda parcial, insensible a mayúsculas)
     if (filters.name) {
-      where.description = { $ilike: `%${filters.name}%` }; // PostgreSQL (usa $like si es SQLite)
+      where.description = { $ilike: `%${filters.name}%` };
     }
 
-    // 🔹 Filtro por rango de precio
     if (filters.minPrice || filters.maxPrice) {
       where.price = {};
       if (filters.minPrice) where.price.$gte = parseFloat(filters.minPrice);
       if (filters.maxPrice) where.price.$lte = parseFloat(filters.maxPrice);
     }
-
-    // 🔹 Filtro por ingredientes (si querés filtrar productos que tengan cierto ingrediente)
-    //if (filters.ingredient) {
-    //  where.ingredients = { name: { $ilike: `%${filters.ingredient}%` } };
-    //}
 
     return this.em.find(Product, where, { populate: ['category', 'ingredients', 'promotions', 'orderItems'] });
 
@@ -84,7 +75,7 @@ export class ProductService {
 
     if (data.categoryId) {
       const category = await this.em.findOne(Category, { id: data.categoryId });
-      if (!category) throw new Error('Category not found');
+      if (!category) throw new Error('Categoria no encontranda');
       product.category = category;
     }
 

@@ -9,16 +9,13 @@ export class OrderController {
     this.service = new OrderService(em);
   }
 
-  // Crear un pedido
   createOrder = async (req: Request, res: Response) => {
     const { user_id, status, description, totalPrice } = req.body;
 
-    // Validación básica
     if (typeof user_id !== 'string' || typeof status !== 'string') {
       return res.status(400).json({ error: 'Invalid or missing order fields (user_id, status)' });
     }
 
-    // Validación del enum status
     if (!['pending', 'completed', 'canceled'].includes(status)) {
       return res.status(400).json({ error: 'Invalid status value' });
     }
@@ -39,13 +36,12 @@ export class OrderController {
     }
   };
 
-  // Obtener todos los pedidos
   getAllOrders = async (req: Request, res: Response) => {
     try {
       const { user_id, status } = req.query;
 
       const filters: any = {};
-      if (user_id) filters.user = user_id; // o "user_id" según cómo esté mapeado en la entidad
+      if (user_id) filters.user = user_id;
       if (status) filters.status = status;
 
       const orders = await this.service.getAllOrders(filters);
@@ -55,7 +51,6 @@ export class OrderController {
     }
   };
 
-  // Obtener pedido por ID
   getOrderById = async (req: Request, res: Response) => {
     const { id } = req.params;
     if (typeof id !== 'string') {
@@ -71,7 +66,6 @@ export class OrderController {
     }
   };
 
-  // Actualizar un pedido
   updateOrder = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { user_id, status, description, totalPrice } = req.body;
@@ -106,7 +100,6 @@ export class OrderController {
     }
   };
 
-  // Eliminar un pedido
   deleteOrder = async (req: Request, res: Response) => {
     const { id } = req.params;
     if (typeof id !== 'string') {
