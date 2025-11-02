@@ -2,16 +2,16 @@ import { MikroORM, RequestContext } from '@mikro-orm/core';
 import express from 'express';
 import cors from 'cors';
 import mikroOrmConfig from './mikro-orm.config';
-import productRoutes from './routes/product.routes';
-import ingredientRoutes from './routes/ingredient.routes';
-import userRoutes from './routes/user.routes';
-import promotionRoutes from './routes/promotion.routes';
-import providerRoutes from './routes/provider.routes';
-import authRoutes from './routes/auth.routes';
-import OrderRoutes from './routes/order.routes';
-import OrderItemsRoutes from './routes/order-items.routes';
-import categoryRoutes from './routes/category.routes';
-import mailRoutes from './routes/mail.routes';
+import productRoutes from './product/product.routes';
+import ingredientRoutes from './ingredient/ingredient.routes';
+import userRoutes from './user/user.routes';
+import promotionRoutes from './promotion/promotion.routes';
+import providerRoutes from './provider/provider.routes';
+import authRoutes from './auth/auth.routes';
+import OrderRoutes from './order/order.routes';
+import OrderItemsRoutes from './orderitem/order-items.routes';
+import categoryRoutes from './category/category.routes';
+import mailRoutes from './mail/mail.routes';
 
 const main = async () => {
 

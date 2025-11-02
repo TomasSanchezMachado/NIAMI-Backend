@@ -1,13 +1,13 @@
 import { Options } from '@mikro-orm/core';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
-import { User } from './entities/User';
-import { Product } from './entities/Product';
-import { Ingredient } from './entities/Ingredient';
-import { Category } from './entities/Category';
-import { Provider } from './entities/Provider';
-import { Order } from './entities/Order';
-import { OrderItem } from './entities/OrderItem';
-import { Promotion } from './entities/Promotion';
+import { User } from './user/User';
+import { Product } from './product/Product';
+import { Ingredient } from './ingredient/Ingredient';
+import { Category } from './category/Category';
+import { Provider } from './provider/Provider';
+import { Order } from './order/Order';
+import { OrderItem } from './orderitem/OrderItem';
+import { Promotion } from './promotion/Promotion';
 
 import dotenv from 'dotenv';
 
