@@ -12,10 +12,10 @@ Content-Type: application/json
 
 {
   "name": "Juan Pablo Ruiz",
-  "email": "juanpabloruizbre@gmail.com",
+  "email": "juanpabloruizbr@gmail.com",
   "password": "123456",
   "role": "customer",
-  "address": "123 Main St, City",
+  "address": "Calle Falsa 123",
   "phone": "+5491123456789"
 }
 
@@ -42,5 +42,5 @@ Content-Type: application/json
 
 {
   "email": "juanpabloruizbre@gmail.com",
-  "code": "8030"
+  "code": "6028"
 }

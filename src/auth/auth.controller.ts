@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { UserService } from '../user/user.service';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
+import bcrypt, { compare } from 'bcryptjs';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
@@ -33,9 +33,12 @@ export class AuthController {
     }
     try {
       const user = await this.service.getUserByEmail(email);
+      //console.log(user)
       if (!user) return res.status(401).json({ error: 'Credenciales inválidas' });
-      const valid = await bcrypt.compare(password, user.password);
+      //const valid = await bcrypt.compare(password, user.password); //Esto para cuando implementemos hash en contraseña
+      const valid = password === user.password;
       if (!valid) return res.status(401).json({ error: 'Credenciales inválidas' });
+      if (user.validated !== true) return res.status(401).json({ error: 'El usuario no ha sido validado' });
       const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
       res.json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
     } catch (err: any) {
