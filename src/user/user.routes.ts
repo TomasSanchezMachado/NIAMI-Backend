@@ -49,4 +49,14 @@ router.delete('/:id', (req, res) => {
   new UserController(em).deleteUser(req, res);
 });
 
+// POST /users/validate
+router.post('/validate', (req, res) => {
+  const em = RequestContext.getEntityManager();
+  if (!em) {
+    return res.status(500).json({ error: 'EntityManager not found in RequestContext.' });
+  }
+  new UserController(em).validateUser(req, res);
+});
+
+
 export default router;

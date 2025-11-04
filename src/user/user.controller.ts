@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { UserService } from './user.service';
 import { EntityManager } from '@mikro-orm/core';
+import { sendMail } from '../mail/mailer';
 
 export class UserController {
   private service: UserService;
@@ -23,6 +24,17 @@ export class UserController {
     }
     try {
       const user = await this.service.createUser({ name, email, password, role, address, phone });
+      const validationCode = Math.floor(Math.random() * 10000).toString();
+      user.validationCode = validationCode;
+      await this.em.persistAndFlush(user);
+      if (user){
+        await sendMail(
+          email,
+          'Bienvenido a NIAMI - FastFood',
+          'Gracias por registrarte.',
+          '<b>Gracias por registrarte. Tu codigo de validación es: ' + validationCode + '</b>'
+        )
+      }
       res.json(user);
     } catch (err: any) {
       res.status(500).json({ error: err.message });
@@ -101,4 +113,28 @@ export class UserController {
       res.status(500).json({ error: err.message });
     }
   };
+
+  validateUser = async (req: Request, res: Response) => {
+    const { email, code } = req.body;
+
+    if (typeof email !== 'string' || typeof code !== 'string') {
+      return res.status(400).json({ error: 'Email y código son requeridos y deben ser string' });
+    }
+
+    try {
+      const user = await this.service.validateUser(email, code);
+
+      await sendMail(
+        email,
+        'Cuenta validada correctamente',
+        'Tu cuenta ha sido validada exitosamente.',
+        `<b>Tu cuenta ha sido validada exitosamente</b>`
+      );
+
+      res.json({ message: 'Usuario validado correctamente', user });
+    } catch (err: any) {
+      res.status(400).json({ error: err.message });
+    }
+  };
+
 }

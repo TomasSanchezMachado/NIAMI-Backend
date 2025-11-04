@@ -11,8 +11,8 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "name": "Juan Perez",
-  "email": "juan@example.com",
+  "name": "Juan Pablo Ruiz",
+  "email": "juanpabloruizbre@gmail.com",
   "password": "123456",
   "role": "customer",
   "address": "123 Main St, City",
@@ -33,5 +33,14 @@ Content-Type: application/json
 }
 
 ### Eliminar usuario
-DELETE http://localhost:3000/api/users/1
+DELETE http://localhost:3000/api/users/ee59b17e-3428-4b75-8f04-25ab9239e61c
 Content-Type: application/json
+
+### Validar usuario
+POST http://localhost:3000/api/users/validate
+Content-Type: application/json
+
+{
+  "email": "juanpabloruizbre@gmail.com",
+  "code": "8030"
+}

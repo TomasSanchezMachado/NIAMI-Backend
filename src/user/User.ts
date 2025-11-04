@@ -23,6 +23,15 @@ export class User extends BaseEntity {
   @Property({ nullable: true })
   phone?: string;
 
+  @Property({ nullable: true })
+  validationCode?: string;
+
+  @Property({ nullable: true })
+  validated?: boolean;
+
+  @Property({ nullable: true })
+  validationDate?: Date;
+
   @OneToMany(() => Order, order => order.user)
   orders = new Collection<Order>(this);
 }

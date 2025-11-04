@@ -60,4 +60,22 @@ export class UserService {
     await this.em.removeAndFlush(user);
     return user;
   }
+
+    async validateUser(email: string, code: string) {
+    const user = await this.em.findOne(User, { email });
+    if (!user) {
+      throw new Error('Usuario no encontrado');
+    }
+    if (!user.validationCode) {
+      throw new Error('El usuario no tiene un código de validación pendiente');
+    }
+    if (user.validationCode !== code) {
+      throw new Error('Código de validación incorrecto');
+    }
+    user.validated = true;
+    user.validationDate = new Date();
+    await this.em.persistAndFlush(user);
+    return { message: 'Usuario validado correctamente', user };
+  }
+
 }
