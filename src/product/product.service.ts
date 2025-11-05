@@ -3,6 +3,7 @@ import { Category } from '../category/Category';
 import { Ingredient } from '../ingredient/Ingredient';
 import { Promotion } from '../promotion/Promotion';
 import { EntityManager, FilterQuery} from '@mikro-orm/core';
+import { wrap } from '@mikro-orm/core';
 
 export class ProductService {
   constructor(private readonly em: EntityManager) {}
@@ -37,21 +38,26 @@ export class ProductService {
     return product;
   }
 
-  async getAllProducts(filters: any = {}) {
-    const where: FilterQuery<Product> = {};
 
-    if (filters.name) {
-      where.description = { $ilike: `%${filters.name}%` };
-    }
+  async getAllProducts(filters: any = {}): Promise<Record<string, any>[]> {
+    const products = await this.em.find(Product, {}, { populate: ['category', 'ingredients', 'promotions', 'orderItems'] });
+    const now = new Date();
 
-    if (filters.minPrice || filters.maxPrice) {
-      where.price = {};
-      if (filters.minPrice) where.price.$gte = parseFloat(filters.minPrice);
-      if (filters.maxPrice) where.price.$lte = parseFloat(filters.maxPrice);
-    }
+    return products.map(product => {
+      const activePromo = product.promotions.getItems().find(
+        promo => new Date(promo.startDate) <= now && new Date(promo.endDate) >= now
+      );
 
-    return this.em.find(Product, where, { populate: ['category', 'ingredients', 'promotions', 'orderItems'] });
+      const finalPrice = activePromo
+        ? product.price - (product.price * (activePromo.discount / 100))
+        : product.price;
 
+      return {
+        ...wrap(product).toObject(),
+        finalPrice,
+        activePromotion: activePromo ? wrap(activePromo).toObject() : null,
+      };
+    });
   }
 
   async getProductById(id: string) {
